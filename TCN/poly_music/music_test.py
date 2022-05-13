@@ -4,11 +4,11 @@ import torch.nn as nn
 from torch.autograd import Variable
 import torch.optim as optim
 import sys
+
 sys.path.append("../../")
 from TCN.poly_music.model import TCN
 from TCN.poly_music.utils import data_generator
 import numpy as np
-
 
 parser = argparse.ArgumentParser(description='Sequence Modeling - Polyphonic Music')
 parser.add_argument('--cuda', action='store_false',
@@ -54,7 +54,6 @@ dropout = args.dropout
 
 model = TCN(input_size, input_size, n_channels, kernel_size, dropout=args.dropout)
 
-
 if args.cuda:
     model.cuda()
 
@@ -76,7 +75,7 @@ def evaluate(X_data, name='Eval'):
                 x, y = x.cuda(), y.cuda()
             output = model(x.unsqueeze(0)).squeeze(0)
             loss = -torch.trace(torch.matmul(y, torch.log(output).float().t()) +
-                                torch.matmul((1-y), torch.log(1-output).float().t()))
+                                torch.matmul((1 - y), torch.log(1 - output).float().t()))
             total_loss += loss.item()
             count += output.size(0)
         eval_loss = total_loss / count
@@ -118,7 +117,7 @@ if __name__ == "__main__":
     best_vloss = 1e8
     vloss_list = []
     model_name = "poly_music_{0}.pt".format(args.data)
-    for ep in range(1, args.epochs+1):
+    for ep in range(1, args.epochs + 1):
         train(ep)
         vloss = evaluate(X_valid, name='Validation')
         tloss = evaluate(X_test, name='Test')
@@ -137,4 +136,3 @@ if __name__ == "__main__":
     print('-' * 89)
     model = torch.load(open(model_name, "rb"))
     tloss = evaluate(X_test)
-
