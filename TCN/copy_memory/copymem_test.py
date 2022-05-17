@@ -5,7 +5,7 @@ import torch.optim as optim
 from torch.autograd import Variable
 import numpy as np
 import sys
-sys.path.append("../../")
+sys.path.append("D:/Adam_Wen/Scientific-Research-Group/Paper/TCN/TCN")
 from TCN.copy_memory.utils import data_generator
 from TCN.copy_memory.model import TCN
 import time

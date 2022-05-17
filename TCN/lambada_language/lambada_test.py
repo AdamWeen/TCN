@@ -6,7 +6,7 @@ import torch.nn as nn
 from torch.autograd import Variable
 import torch.optim as optim
 import sys
-sys.path.append("../../")
+sys.path.append("D:/Adam_Wen/Scientific-Research-Group/Paper/TCN")
 from TCN.lambada_language.utils import *
 from TCN.lambada_language.model import TCN
 import pickle
